@@ -74,65 +74,50 @@ class LibrarySwingApp extends JFrame {
                 }
             }
         });
-
-        // When book is selected, show stock
         bookBox.addActionListener(e -> {
             Book selected = (Book) bookBox.getSelectedItem();
             if (selected != null) {
                 stockField.setText(String.valueOf(selected.getStock()));
             }
         });
-
-        // Date labels
         borrowDateLabel = new JLabel(LocalDate.now().toString());
         dueDateLabel = new JLabel(LocalDate.now().plusDays(14).toString());
-
         defaultValueField = new JTextField("2.00");
-
         formPanel.add(new JLabel("Name:"));
         formPanel.add(nameField);
         formPanel.add(new JLabel("Date Borrowed:"));
         formPanel.add(borrowDateLabel);
-
         formPanel.add(new JLabel("Borrower ID:"));
         formPanel.add(idField);
         formPanel.add(new JLabel("Date Due:"));
         formPanel.add(dueDateLabel);
-
         formPanel.add(new JLabel("Choose Category:"));
         formPanel.add(categoryBox);
         formPanel.add(new JLabel("Default Value:"));
         formPanel.add(defaultValueField);
-
         formPanel.add(new JLabel("Choose Book:"));
         formPanel.add(bookBox);
         formPanel.add(new JLabel(""));
         formPanel.add(new JLabel(""));
-
         formPanel.add(new JLabel("Book Stock:"));
         formPanel.add(stockField);
         formPanel.add(new JLabel(""));
         formPanel.add(new JLabel(""));
-
         add(formPanel, BorderLayout.CENTER);
-
-        // Borrow button
         JButton borrowButton = new JButton("Borrow");
         borrowButton.addActionListener(e -> {
             Book selected = (Book) bookBox.getSelectedItem();
             if (selected != null && selected.getStock() > 0) {
                 selected.borrowBook();
                 stockField.setText(String.valueOf(selected.getStock()));
-                JOptionPane.showMessageDialog(this, "✅ Book borrowed successfully!");
+                JOptionPane.showMessageDialog(this, "Book borrowed successfully!");
             } else {
-                JOptionPane.showMessageDialog(this, "❌ Book is out of stock.");
+                JOptionPane.showMessageDialog(this, " Book is out of stock.");
             }
         });
-
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(borrowButton);
         add(buttonPanel, BorderLayout.SOUTH);
-
         setVisible(true);
     }
 
